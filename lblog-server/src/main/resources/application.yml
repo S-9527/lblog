@@ -16,8 +16,11 @@ mybatis:
 spring:
   sql:
     init:
-      mode: always
-      continue-on-error: true
+      mode: never
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
   servlet:
     multipart:
       enabled: true
@@ -30,9 +33,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource #指定druid数据源
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.1.5:3306/iblog?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
-    username: root
-    password: asd456654.
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/iblog?createDatabaseIfNotExist=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:asd456654.}
     # druid 连接池管理
     druid:
       # 初始化时建立物理连接的个数
@@ -108,7 +111,7 @@ logging:
 
 # 自定义配置
 lblog:
-  upload-dir: E:/workspace/java/lblog/lblog-server/uploads
+  upload-dir: ${LBLOG_UPLOAD_DIR:/app/uploads}
   token:
     access-token-expire-minutes: 120
     refresh-token-expire-days: 7
