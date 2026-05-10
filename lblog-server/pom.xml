@@ -144,7 +144,6 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>com.yang.lblogserver.LblogServerApplication</mainClass>
-                    <skip>true</skip>
                 </configuration>
                 <executions>
                     <execution>
